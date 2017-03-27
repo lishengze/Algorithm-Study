@@ -1,4 +1,12 @@
 #include "sort.h"
+#include <algorithm>
+using std::swap;
+
+int isBigger(int value1, int value2)
+{
+	if (value1 >= value2) return 1;
+	else return -1;
+}
 
 void BasicSort::_quickSort(int * originalData, int startIndex, int endIndex, CompareFunc func)
 {
@@ -30,8 +38,32 @@ void BasicSort::_quickSort(int * originalData, int startIndex, int endIndex, Com
 	_quickSort(originalData, middleIndex + 1, endIndex, func);
 }
 
-int isBigger(int value1, int value2)
+void BasicSort::quickSort(int * originalData, int dataLength)
 {
-	if (value1 >= value2) return 1;
-	else return -1;
+	_quickSort(originalData, 0, dataLength - 1, isBigger);
 }
+
+void BasicSort::_bubbleSort(int * originalData, int startIndex, int endIndex, CompareFunc compFunc)
+{
+	bool isSwaped = true;
+	for (int curEndIndex = endIndex; curEndIndex > startIndex; --curEndIndex) {
+		if (!isSwaped) break;
+		isSwaped = false;
+		for (int curStartIndex = startIndex; curStartIndex < curEndIndex; ++curStartIndex) {
+			if (compFunc(originalData[curStartIndex], originalData[curStartIndex + 1]) == 1) {
+				//int tmpValue = originalData[curStartIndex];
+				//originalData[curStartIndex] = originalData[curStartIndex + 1];
+				//originalData[curStartIndex + 1] = tmpValue;
+				swap(originalData[curStartIndex], originalData[curStartIndex + 1]);
+				isSwaped = true;
+			}
+		}
+	}
+}
+
+void BasicSort::bubbleSort(int * originalData, int dataLength)
+{
+	_bubbleSort(originalData, 0, dataLength - 1, isBigger);
+}
+
+

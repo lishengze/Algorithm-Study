@@ -1,12 +1,3 @@
-/.vs/
-/bin/
-/obj/
-/Debug/
-/x64/
-*.sln
-*.njsproj
-*.vcxproj
-*.vcxproj.filters
 !*.h
 !*.cpp
 !*.js
