@@ -9,7 +9,7 @@ void testSort()
 		int dataLength = 10;
 		int* originalData = new int[dataLength];
 		if (!originalData) {
-			cout << "·ÖÅäÄÚ´æÊ§°Ü!" << endl;
+			cout << "åˆ†é…å†…å­˜å¤±è´¥!" << endl;
 		}
 
 		for (int i = 0; i < dataLength; ++i) {
@@ -33,7 +33,7 @@ void testSort()
 
 	}
 	catch (exception* exceptionPointer) {
-		PrintData("·¢ÉúÒì³££¬ Òì³£Îª: ", exceptionPointer->what());
+		PrintData("å‘ç”Ÿå¼‚å¸¸ï¼Œ å¼‚å¸¸ä¸º: ", exceptionPointer->what());
 	}
 
 }

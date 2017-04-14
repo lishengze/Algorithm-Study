@@ -19,4 +19,4 @@ Print.o: Print.cpp Print.h
 
 .PHONY : clean
 clean:
-	rm -f *.o
+	-rm -f *.o
