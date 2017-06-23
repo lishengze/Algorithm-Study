@@ -67,3 +67,38 @@ void BasicSort::bubbleSort(int * originalData, int dataLength)
 }
 
 
+void BasicSort::_mergeSort(int * originalData, int startIndex, int endIndex, CompareFunc func){
+	if (endIndex <= startIndex) return;
+
+	int middleIndex = (startIndex + endIndex)/2;
+
+	_mergeSort(orginalData, startIndex, middleIndex);
+	_mergeSort(orginalData, middleIndex+1, endIndex);
+
+	int dataLength = endIndex - startIndex + 1;
+	int* tmpData = new int [dataLength];
+
+	int tmpIndex = 0;
+	int leftIndex = startIndex;
+	int rightIndex = middleIndex + 1;
+	while (leftIndex <= middleIndex && rightIndex <= endIndex) {
+
+	}
+	if (leftIndex <= middleIndex) {
+
+	}
+	if (rightIndex <= endIndex) {
+
+	}
+
+	memcpy(originalData + startIndex, tmpData, dataLength * sizeof(int));
+
+	if (NULL != tmpData) {
+		delete[] tmpData;
+		tmpData = NULL;
+	}
+}
+
+void BasicSort::mergeSort(int * originalData, int dataLength){
+
+}

@@ -15,6 +15,9 @@ public:
 
 	void bubbleSort(int * originalData, int dataLength);
 
+	void _mergeSort(int * originalData, int startIndex, int endIndex, CompareFunc func);
+
+	void mergeSort(int * originalData, int dataLength);
 };
 
 #endif // !_SORT_H_
