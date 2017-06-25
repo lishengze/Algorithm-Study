@@ -11,7 +11,7 @@ main.o:main.cpp test.h
 test.o:test.cpp test.h sort.h
 	$(CC) -c test.cpp
 
-sort.o:sort.cpp sort.h
+sort.o:sort.cpp sort.h Print.h
 	$(CC) -c sort.cpp
 
 Print.o: Print.cpp Print.h

@@ -37,3 +37,21 @@ void testSort()
 	}
 
 }
+
+void testMerge() {
+	try {
+		const int dataLength = 10;
+		// int originalData[dataLength] = {1, 3, 5, 7, 9, 2, 4, 6, 8, 10};
+		int originalData[dataLength] = {10, 8, 7, 7, 6, 5, 4, 3, 2, 1};
+		BasicSort baseSortObj = BasicSort();
+
+		PrintData("Original Data: ", originalData, dataLength);
+
+		// baseSortObj._merge(originalData, 0, dataLength-1, isBigger);
+		baseSortObj.mergeSort(originalData, dataLength);
+		PrintData("MergeSort Data: ", originalData, dataLength);
+
+	} catch (exception* exceptionPointer) {
+		PrintData("发生异常， 异常为: ", exceptionPointer->what());		
+	}
+}

@@ -4,4 +4,6 @@
 
 void testSort();
 
+void testMerge();
+
 #endif

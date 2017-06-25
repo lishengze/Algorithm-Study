@@ -1,11 +1,14 @@
 #include "sort.h"
 #include <algorithm>
+#include<cstring>
+#include "Print.h"
 using std::swap;
+using std::memcpy;
 
 int isBigger(int value1, int value2)
 {
 	if (value1 >= value2) return 1;
-	else return -1;
+	else return 0;
 }
 
 void BasicSort::_quickSort(int * originalData, int startIndex, int endIndex, CompareFunc func)
@@ -66,30 +69,33 @@ void BasicSort::bubbleSort(int * originalData, int dataLength)
 	_bubbleSort(originalData, 0, dataLength - 1, isBigger);
 }
 
-
-void BasicSort::_mergeSort(int * originalData, int startIndex, int endIndex, CompareFunc func){
-	if (endIndex <= startIndex) return;
-
-	int middleIndex = (startIndex + endIndex)/2;
-
-	_mergeSort(orginalData, startIndex, middleIndex);
-	_mergeSort(orginalData, middleIndex+1, endIndex);
-
+void BasicSort::_merge(int * originalData, int startIndex, int endIndex, CompareFunc func) {
 	int dataLength = endIndex - startIndex + 1;
+	int middleIndex = (startIndex + endIndex)/2;
 	int* tmpData = new int [dataLength];
-
 	int tmpIndex = 0;
 	int leftIndex = startIndex;
 	int rightIndex = middleIndex + 1;
+
 	while (leftIndex <= middleIndex && rightIndex <= endIndex) {
+		// cout << "leftIndex: " << leftIndex << "	leftData: " << originalData[leftIndex] << "	"
+		//      << "rightIndex: " << rightIndex <<"	rightData: "<< originalData[rightIndex] <<endl;		
+		if (func(originalData[leftIndex], originalData[rightIndex])) {
+			tmpData[tmpIndex++] = originalData[rightIndex++];
+		} else {
+			tmpData[tmpIndex++] = originalData[leftIndex++];
+		}
 
 	}
-	if (leftIndex <= middleIndex) {
 
+	if (leftIndex <= middleIndex) {
+		memcpy(tmpData + tmpIndex, originalData + leftIndex, (middleIndex-leftIndex + 1) * sizeof(int));
 	}
 	if (rightIndex <= endIndex) {
-
+		memcpy(tmpData + tmpIndex, originalData + rightIndex, (endIndex - rightIndex + 1) * sizeof(int));
 	}
+
+	// PrintData("tmpData: ", tmpData, dataLength);
 
 	memcpy(originalData + startIndex, tmpData, dataLength * sizeof(int));
 
@@ -99,6 +105,17 @@ void BasicSort::_mergeSort(int * originalData, int startIndex, int endIndex, Com
 	}
 }
 
-void BasicSort::mergeSort(int * originalData, int dataLength){
+void BasicSort::_mergeSort(int * originalData, int startIndex, int endIndex, CompareFunc func){
+	if (endIndex <= startIndex) return;
 
+	int middleIndex = (startIndex + endIndex)/2;
+
+	_mergeSort(originalData, startIndex, middleIndex, func);
+	_mergeSort(originalData, middleIndex+1, endIndex, func);
+
+	_merge(originalData, startIndex, endIndex, func);
+}
+
+void BasicSort::mergeSort(int * originalData, int dataLength){
+	_mergeSort(originalData, 0, dataLength-1, isBigger);
 }
