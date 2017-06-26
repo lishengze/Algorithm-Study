@@ -1,6 +1,6 @@
 #include "sort.h"
 #include <algorithm>
-#include<cstring>
+#include <cstring>
 #include "Print.h"
 using std::swap;
 using std::memcpy;
@@ -118,4 +118,46 @@ void BasicSort::_mergeSort(int * originalData, int startIndex, int endIndex, Com
 
 void BasicSort::mergeSort(int * originalData, int dataLength){
 	_mergeSort(originalData, 0, dataLength-1, isBigger);
+}
+
+void BasicSort::getHeapRootIndex(int startIndex, int endIndex) {
+	if (endIndex < startIndex) return -1;
+	if (endIndex == startIndex) return startIndex;
+}
+
+void BasicSort::makeHeap(int * originalData, int startIndex, int endIndex, CompareFunc func) {
+	if (endIndex <= startIndex) return;
+	
+	int rootIndex = getHeapRootIndex(startIndex, endIndex);
+	makeHeap(originalData, startIndex, rootIndex-1, func);
+	makeHeap(originalData, rootIndex+1, endIndex, func);
+	
+	int leftChildIndex = getHeapRootIndex(startIndex, rootIndex -1);
+	int rightChildIndex = getHeapRootIndex(rootIndex + 1, endIndex);
+	
+	if (rightChildIndex == -1) {
+		if (originalData[leftChildIndex] > originalData[rootIndex]) {
+			swap(originalData[leftChildIndex], originalData[rootIndex]);
+		}
+	} else {
+		if (originalData[leftChildIndex] > originalData[rootIndex] 
+			&& originalData[leftChildIndex] > originalData[rightChildIndex]) {
+			swap(originalData[leftChildIndex], originalData[rootIndex]);
+		} else if (originalData[rightChildIndex] > originalData[rootIndex] 
+			&& originalData[rightChildIndex] > originalData[leftChildIndex]) {
+			swap(originalData[rightChildIndex], originalData[rootIndex]);
+		}
+	}
+}
+
+void BasicSort::_heapSort(int * originalData, int startIndex, int endIndex, CompareFunc func) {
+	if (endIndex == startIndex) return;
+	makeHeap(originalData, startIndex, endIndex, func);
+	int rootIndex = getHeapRootIndex(startIndex, endIndex);
+	swap(originalData[endIndex], originalData[rootIndex);
+	_heapSort(originalData, startIndex, endIndex-1);
+}
+	
+void BasicSort::heapSort(int * originalData, int dataLength){
+	_heapSort(originalData, 0, dataLength-1, isBigger);
 }
