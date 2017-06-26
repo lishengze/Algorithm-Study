@@ -6,4 +6,6 @@ void testSort();
 
 void testMerge();
 
+void testHeap();
+
 #endif

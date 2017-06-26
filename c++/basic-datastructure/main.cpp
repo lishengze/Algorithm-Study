@@ -2,5 +2,6 @@
 
 int main() {
 	// testSort();
-	testMerge();
+	// testMerge();
+	testHeap();
 }

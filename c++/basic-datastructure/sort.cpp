@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <cstring>
 #include "Print.h"
+#include <math.h>
 using std::swap;
 using std::memcpy;
 
@@ -10,6 +11,10 @@ int isBigger(int value1, int value2)
 	if (value1 >= value2) return 1;
 	else return 0;
 }
+
+// double log2(double value) {
+// 	return log(value) / log(2);
+// }
 
 void BasicSort::_quickSort(int * originalData, int startIndex, int endIndex, CompareFunc func)
 {
@@ -120,9 +125,29 @@ void BasicSort::mergeSort(int * originalData, int dataLength){
 	_mergeSort(originalData, 0, dataLength-1, isBigger);
 }
 
-void BasicSort::getHeapRootIndex(int startIndex, int endIndex) {
+int BasicSort::getHeapRootIndex(int startIndex, int endIndex) {
 	if (endIndex < startIndex) return -1;
 	if (endIndex == startIndex) return startIndex;
+	int nodeNumb = endIndex - startIndex + 1;
+	double fuzzyTreeHeight = log2(nodeNumb);
+	int treeHeight = ceil(fuzzyTreeHeight) == floor(fuzzyTreeHeight) ? ceil(fuzzyTreeHeight) : ceil(fuzzyTreeHeight) - 1;
+	int curbottomLeafNodeNumb = nodeNumb - (pow(2, treeHeight) - 1);
+	int fullBottomLeafNodeNumb = pow(2, treeHeight);
+	int leftTreeNodeNumb;
+	if (curbottomLeafNodeNumb >= fullBottomLeafNodeNumb/2) {
+		leftTreeNodeNumb = pow(2, treeHeight) - 1;
+	} else {
+		leftTreeNodeNumb = pow(2, treeHeight-1) - 1 + curbottomLeafNodeNumb;
+	}
+	PrintDataOneLine("nodeNumb", nodeNumb);
+	PrintDataOneLine("fuzzyTreeHeight", fuzzyTreeHeight);
+	PrintDataOneLine("treeHeight", treeHeight);
+	PrintDataOneLine("curbottomLeafNodeNumb", curbottomLeafNodeNumb);
+	PrintDataOneLine("fullBottomLeafNodeNumb", fullBottomLeafNodeNumb);
+	PrintDataOneLine("leftTreeNodeNumb", leftTreeNodeNumb);
+	PrintDataOneLine("heapRootIndex", startIndex + leftTreeNodeNumb);
+	cout << "-----------  getHeapRootIndex End! -------------\n" << endl;
+	return startIndex + leftTreeNodeNumb;
 }
 
 void BasicSort::makeHeap(int * originalData, int startIndex, int endIndex, CompareFunc func) {
@@ -135,7 +160,9 @@ void BasicSort::makeHeap(int * originalData, int startIndex, int endIndex, Compa
 	int leftChildIndex = getHeapRootIndex(startIndex, rootIndex -1);
 	int rightChildIndex = getHeapRootIndex(rootIndex + 1, endIndex);
 	
-	if (rightChildIndex == -1) {
+	if (rightChildIndex == -1) {
+
+
 		if (originalData[leftChildIndex] > originalData[rootIndex]) {
 			swap(originalData[leftChildIndex], originalData[rootIndex]);
 		}
@@ -154,10 +181,11 @@ void BasicSort::_heapSort(int * originalData, int startIndex, int endIndex, Comp
 	if (endIndex == startIndex) return;
 	makeHeap(originalData, startIndex, endIndex, func);
 	int rootIndex = getHeapRootIndex(startIndex, endIndex);
-	swap(originalData[endIndex], originalData[rootIndex);
-	_heapSort(originalData, startIndex, endIndex-1);
+	swap(originalData[endIndex], originalData[rootIndex]);
+	_heapSort(originalData, startIndex, endIndex-1, func);
 }
 	
-void BasicSort::heapSort(int * originalData, int dataLength){
+void BasicSort::heapSort(int * originalData, int dataLength){
+
 	_heapSort(originalData, 0, dataLength-1, isBigger);
 }

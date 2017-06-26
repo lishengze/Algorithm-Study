@@ -55,3 +55,17 @@ void testMerge() {
 		PrintData("发生异常， 异常为: ", exceptionPointer->what());		
 	}
 }
+
+void testHeap() {
+	try {
+		const int dataLength = 5;
+		int originalData[dataLength] = {1, 3, 4, 6, 8};
+		BasicSort baseSortObj = BasicSort();
+		for (int i=0; i < dataLength; ++i) {
+			baseSortObj.getHeapRootIndex(0, originalData[i]);
+		}
+
+	} catch (exception* exceptionPointer) {
+		PrintData("发生异常， 异常为: ", exceptionPointer->what());		
+	}
+}

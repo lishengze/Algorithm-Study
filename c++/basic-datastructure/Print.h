@@ -24,4 +24,9 @@ void PrintData(string dataDescription, datatype data) {
 	cout << data << endl;
 }
 
+template<class datatype>
+void PrintDataOneLine(string dataDescription, datatype data) {
+	cout << dataDescription << "	" << data << endl;
+}
+
 #endif // !_PRINT_H_

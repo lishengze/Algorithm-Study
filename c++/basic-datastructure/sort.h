@@ -5,6 +5,8 @@ typedef int(*CompareFunc)(int, int);
 
 int isBigger(int value1, int value2);
 
+// double log2(double value);
+
 class BasicSort {
 public:
 	void _quickSort(int * originalData, int startIndex, int endIndex, CompareFunc func);
@@ -21,7 +23,7 @@ public:
 
 	void mergeSort(int * originalData, int dataLength);
 
-	void getHeapRootIndex(int startIndex, int endIndex);
+	int getHeapRootIndex(int startIndex, int endIndex);
 
 	void makeHeap(int * originalData, int startIndex, int endIndex, CompareFunc func);
 
