@@ -6,6 +6,10 @@ void testSort();
 
 void testMerge();
 
+void testGetHeapRootIndex();
+
+void testMakeHeap();
+
 void testHeap();
 
 #endif

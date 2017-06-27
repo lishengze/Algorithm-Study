@@ -16,8 +16,7 @@ int isBigger(int value1, int value2)
 // 	return log(value) / log(2);
 // }
 
-void BasicSort::_quickSort(int * originalData, int startIndex, int endIndex, CompareFunc func)
-{
+void BasicSort::_quickSort(int * originalData, int startIndex, int endIndex, CompareFunc func) {
 	if (startIndex >= endIndex) {
 		return;
 	}
@@ -139,14 +138,14 @@ int BasicSort::getHeapRootIndex(int startIndex, int endIndex) {
 	} else {
 		leftTreeNodeNumb = pow(2, treeHeight-1) - 1 + curbottomLeafNodeNumb;
 	}
-	PrintDataOneLine("nodeNumb", nodeNumb);
-	PrintDataOneLine("fuzzyTreeHeight", fuzzyTreeHeight);
-	PrintDataOneLine("treeHeight", treeHeight);
-	PrintDataOneLine("curbottomLeafNodeNumb", curbottomLeafNodeNumb);
-	PrintDataOneLine("fullBottomLeafNodeNumb", fullBottomLeafNodeNumb);
-	PrintDataOneLine("leftTreeNodeNumb", leftTreeNodeNumb);
-	PrintDataOneLine("heapRootIndex", startIndex + leftTreeNodeNumb);
-	cout << "-----------  getHeapRootIndex End! -------------\n" << endl;
+	// PrintDataOneLine("nodeNumb", nodeNumb);
+	// PrintDataOneLine("fuzzyTreeHeight", fuzzyTreeHeight);
+	// PrintDataOneLine("treeHeight", treeHeight);
+	// PrintDataOneLine("curbottomLeafNodeNumb", curbottomLeafNodeNumb);
+	// PrintDataOneLine("fullBottomLeafNodeNumb", fullBottomLeafNodeNumb);
+	// PrintDataOneLine("leftTreeNodeNumb", leftTreeNodeNumb);
+	// PrintDataOneLine("heapRootIndex", startIndex + leftTreeNodeNumb);
+	// cout << "-----------  getHeapRootIndex End! -------------\n" << endl;
 	return startIndex + leftTreeNodeNumb;
 }
 
@@ -161,8 +160,6 @@ void BasicSort::makeHeap(int * originalData, int startIndex, int endIndex, Compa
 	int rightChildIndex = getHeapRootIndex(rootIndex + 1, endIndex);
 	
 	if (rightChildIndex == -1) {
-
-
 		if (originalData[leftChildIndex] > originalData[rootIndex]) {
 			swap(originalData[leftChildIndex], originalData[rootIndex]);
 		}
@@ -182,6 +179,7 @@ void BasicSort::_heapSort(int * originalData, int startIndex, int endIndex, Comp
 	makeHeap(originalData, startIndex, endIndex, func);
 	int rootIndex = getHeapRootIndex(startIndex, endIndex);
 	swap(originalData[endIndex], originalData[rootIndex]);
+	// PrintData("Cur HeapSorted data: ", originalData, 6);
 	_heapSort(originalData, startIndex, endIndex-1, func);
 }
 	

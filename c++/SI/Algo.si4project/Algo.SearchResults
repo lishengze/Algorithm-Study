@@ -1,0 +1,4 @@
+---- _merge Matches (3 in 2 files) ----
+sort.cpp (D:\Document\github\study\algorithm\c++\basic-datastructure) line 72 : void BasicSort::_merge(int * originalData, int startIndex, int endIndex, CompareFunc func) {
+BasicSort::_mergeSort in sort.cpp (D:\Document\github\study\algorithm\c++\basic-datastructure) : 	_merge(originalData, startIndex, endIndex, func);
+BasicSort in sort.h (D:\Document\github\study\algorithm\c++\basic-datastructure) : 	void _merge(int * originalData, int startIndex, int endIndex, CompareFunc func);

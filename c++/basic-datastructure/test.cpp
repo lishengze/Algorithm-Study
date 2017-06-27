@@ -3,8 +3,7 @@
 #include <exception>
 using std::exception;
 
-void testSort()
-{
+void testSort() {
 	try {
 		int dataLength = 10;
 		int* originalData = new int[dataLength];
@@ -56,7 +55,7 @@ void testMerge() {
 	}
 }
 
-void testHeap() {
+void testGetHeapRootIndex () {
 	try {
 		const int dataLength = 5;
 		int originalData[dataLength] = {1, 3, 4, 6, 8};
@@ -65,7 +64,48 @@ void testHeap() {
 			baseSortObj.getHeapRootIndex(0, originalData[i]);
 		}
 
+		int a[] = {16,7,3,20,17,8};
+
+	} catch (exception* exceptionPointer) {
+		PrintData("发生异常， 异常为: ", exceptionPointer->what());		
+	}	
+}
+
+void testMakeHeap() {
+	try {
+		const int dataLength = 6;
+		int originalData[dataLength] = {20, 7, 3, 16, 17, 8};
+		BasicSort baseSortObj = BasicSort();
+
+		PrintData("original data: ", originalData, dataLength);
+
+		baseSortObj.makeHeap(originalData, 0, dataLength-1, isBigger);
+
+		PrintData("Heap data: ", originalData, dataLength);
+
 	} catch (exception* exceptionPointer) {
 		PrintData("发生异常， 异常为: ", exceptionPointer->what());		
 	}
+} 
+
+void testHeapSort() {
+	try {
+		const int dataLength = 6;
+		int originalData[dataLength] = {20, 7, 3, 16, 17, 8};
+		BasicSort baseSortObj = BasicSort();
+
+		PrintData("original data: ", originalData, dataLength);
+
+		baseSortObj._heapSort(originalData, 0, dataLength-1, isBigger);
+
+		PrintData("HeapSorted data: ", originalData, dataLength);
+
+	} catch (exception* exceptionPointer) {
+		PrintData("发生异常， 异常为: ", exceptionPointer->what());		
+	}	
+}
+
+void testHeap() {
+	// testMakeHeap();
+	testHeapSort();
 }
